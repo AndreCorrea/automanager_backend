@@ -1,0 +1,9 @@
+{
+  "name": "automanager",
+  "version": "1.0.0",
+  "description": "An app to manage vehicle usage",
+  "main": "index.js",
+  "repository": "https://github.com/AndreCorrea/automanager",
+  "author": "André Correa",
+  "license": "MIT"
+}
