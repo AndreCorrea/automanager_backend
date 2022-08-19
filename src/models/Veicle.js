@@ -5,7 +5,8 @@ const Veicle = new Schema({
 
     brand: {
         type: String,
-        required: true
+        required: true,
+        index: true
     },
 
     model: {
@@ -23,6 +24,7 @@ const Veicle = new Schema({
     color: {
         type: String,
         required: true,
+        index: true
     },
 
     company_id: {

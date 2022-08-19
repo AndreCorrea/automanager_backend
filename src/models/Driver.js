@@ -5,13 +5,13 @@ const Driver = new Schema({
 
     name: {
         type: String,
-        required: true
+        required: true,
+        index: true
     },
 
     cpf: {
         type: String,
         required: true,
-        unique: true,
         index: true
     },
 

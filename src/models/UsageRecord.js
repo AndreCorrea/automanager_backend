@@ -4,12 +4,13 @@ const Schema = mongoose.Schema;
 const UsageRecord = new Schema({
 
     start_date: {
-        type: String,
+        type: Date,
         required: true,
     },
 
     finish_date: {
-        type: String,
+        type: Date,
+        default: null
     },
 
     reason_use: {
@@ -23,16 +24,21 @@ const UsageRecord = new Schema({
         ref: 'Driver'
     },
 
-    car_id: {
+    veicle_id: {
         type: Schema.Types.ObjectId,
         required: true,
-        ref: 'Car'
+        ref: 'Veicle'
     },
 
     company_id: {
         type: Schema.Types.ObjectId,
         required: true,
         ref: 'Company'
+    },
+
+    using_status: {
+        type: Boolean,
+        default: true
     },
 
     createAt: {
