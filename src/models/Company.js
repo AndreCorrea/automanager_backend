@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const Company = new Schema({
 
@@ -42,7 +42,7 @@ const Company = new Schema({
     status: {
         type: String,
         required: true,
-        default: 'ativo', // Apenas para motivos de testes. Normalmente, inicia-se "pendente".
+        default: 'ativo', // Apenas para motivos de testes. Normalmente, inicia-se "pendente" para verificações.
         enum: ['pendente', 'ativo', 'desativado']
     },
 
@@ -58,4 +58,4 @@ const Company = new Schema({
 
 })
 
-module.exports = mongoose.model('Company', Company);
+module.exports = mongoose.model('Company', Company)

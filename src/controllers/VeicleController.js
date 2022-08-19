@@ -12,15 +12,20 @@ const VeicleController = {
         query.company_id = verifyCompany._id
 
         if (req.query.brand) {
-            query.brand = req.query.brand
+            query.brand = { "$regex": `${req.query.brand}`, "$options": "i" }
         }
 
         if (req.query.color) {
-            query.color = req.query.color
+            query.color = { "$regex": `${req.query.color}`, "$options": "i" }
+        }
+
+        const filteredVeicles = await Veicle.find(query)
+
+        if (filteredVeicles.length < 1) {
+            return res.status(404).json({ error: { notice: "Veículo não encontrado." } })
         }
 
         try {
-            const filteredVeicles = await Veicle.find(query)
             return res.status(200).json({ data: { filteredVeicles } })
         } catch (error) {
             console.log(error)
@@ -110,7 +115,7 @@ const VeicleController = {
             return res.status(400).json({ error: { notice: "Não autorizado" } })
         }
 
-        const filterVeicle = { _id: veicleVerify._id };
+        const filterVeicle = { _id: veicleVerify._id }
         const updateVeicle = {
             brand,
             model,
@@ -134,10 +139,10 @@ const VeicleController = {
         const token = getToken && getToken.split(' ')[1]
         const verifyCompany = await Company.findOne({ token })
 
-        const verifyLicense = await Veicle.findOne({ license_plate: data.license_plate })
+        const verifyLicense = await Veicle.findOne({ license_plate: data.license_plate, company_id: verifyCompany._id })
 
         if (verifyLicense) {
-            return res.status(400).json({ error: { notice: "Place já cadastrada no sistema." } })
+            return res.status(400).json({ error: { notice: "Você já possui um veículo com essa placa cadastrado." } })
         }
 
         const veicleData = new Veicle({

@@ -19,8 +19,14 @@ const DriverController = {
             query.cpf = req.query.cpf
         }
 
+        const filteredDrivers = await Driver.find(query)
+
+        if (filteredDrivers.length < 1) {
+            return res.status(404).json({ error: { notice: "Motorista não encontrado." } })
+        }
+
+
         try {
-            const filteredDrivers = await Driver.find(query)
             return res.status(200).json({ data: { filteredDrivers } })
         } catch (error) {
             console.log(error)
@@ -56,7 +62,7 @@ const DriverController = {
         }
 
         try {
-            const getDriver = await Driver.findOne({ _id: driverVerify._id }).populate('company_id')
+            const getDriver = await Driver.findOne({ _id: driverVerify._id })
             return res.status(200).json({ data: { getDriver } })
         } catch (error) {
             console.log(error)
@@ -98,7 +104,7 @@ const DriverController = {
             return res.status(404).json({ error: { notice: "Veículo não encontrado." } })
         }
 
-        const driverData = { _id: driverVerify._id };
+        const driverData = { _id: driverVerify._id }
         const updateDriver = {
             ...data,
             updateAt: new Date()

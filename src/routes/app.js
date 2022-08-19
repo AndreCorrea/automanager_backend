@@ -6,7 +6,7 @@ const RecordController = require('../controllers/RecordController')
 
 module.exports = function (app) {
 
-    // Company Route 
+    // User company Route 
     app.post('/company/register', CompanyController.register)
     app.post('/company/login', CompanyController.login)
 
@@ -33,7 +33,4 @@ module.exports = function (app) {
     app.delete('/record/:id', authCompany, RecordController.delete)
     app.get('/record/:id', authCompany, RecordController.showOne)
     app.get('/records', authCompany, RecordController.showAll)
-
-    // Criar filtro se der tempo
-
 }

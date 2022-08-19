@@ -74,7 +74,7 @@ const RecordController = {
             return res.status(404).json({ error: { notice: "Registro não encontrado." } })
         }
 
-        const recordData = { _id: verifyRecord._id };
+        const recordData = { _id: verifyRecord._id }
         const updateRecord = {
             finish_date: new Date(),
             using_status: false,
@@ -102,7 +102,7 @@ const RecordController = {
             return res.status(404).json({ error: { notice: "Registro não encontrado." } })
         }
 
-        const recordData = { _id: verifyRecord._id };
+        const recordData = { _id: verifyRecord._id }
         const updateRecord = {
             ...data,
             updateAt: new Date()

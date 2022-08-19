@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const UsageRecord = new Schema({
 
@@ -53,4 +53,4 @@ const UsageRecord = new Schema({
 
 })
 
-module.exports = mongoose.model('Record', UsageRecord);
+module.exports = mongoose.model('Record', UsageRecord)

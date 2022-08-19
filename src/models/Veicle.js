@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const Veicle = new Schema({
 
@@ -17,8 +17,6 @@ const Veicle = new Schema({
     license_plate: {
         type: String,
         required: true,
-        unique: true,
-        index: true
     },
 
     color: {
@@ -45,4 +43,4 @@ const Veicle = new Schema({
 
 })
 
-module.exports = mongoose.model('Veicle', Veicle);
+module.exports = mongoose.model('Veicle', Veicle)
