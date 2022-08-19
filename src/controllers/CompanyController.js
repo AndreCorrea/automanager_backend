@@ -7,17 +7,16 @@ const CompanyController = {
 
     async login(req, res) {
         const { cnpj, password } = req.body
-
         const cnpjExist = await Company.findOne({ cnpj })
 
         if (!cnpjExist) {
-            return res.status(404).json({ error: { message: "CNPJ ou senha estão incorretos." } })
+            return res.status(400).json({ error: { notice: "CNPJ ou senha estão incorretos." } })
         }
 
         const comparePassword = await bcrypt.compare(password, cnpjExist.password)
 
         if (!comparePassword) {
-            return res.status(404).json({ error: { message: "CNPJ ou senha estão incorretos." } })
+            return res.status(400).json({ error: { notice: "CNPJ ou senha estão incorretos." } })
         }
 
         const companyData = {
@@ -32,10 +31,10 @@ const CompanyController = {
         }
 
         try {
-            res.status(200).json({ companyData })
-        } catch (errorr) {
-            res.status(500).json({ error: "Houve um problema no servidor. Tente novamente mais tarde." })
-            console.log(errorr)
+            return res.status(200).json({ data: { companyData } })
+        } catch (error) {
+            console.log(error)
+            return res.status(500).json({ error: { notice: "Houve um problema no servidor. Tente novamente mais tarde." } })
         }
     },
 
@@ -46,11 +45,11 @@ const CompanyController = {
         const cnpjExist = await Company.findOne({ cnpj })
 
         if (mailExist) {
-            return res.status(400).json({ error: { mesage: "Este email já existe" } })
+            return res.status(400).json({ error: { notice: "Este email já existe" } })
         }
 
         if (cnpjExist) {
-            return res.status(400).json({ error: { mesage: "Este CNPJ já existe" } })
+            return res.status(400).json({ error: { notice: "Este CNPJ já existe" } })
         }
 
         const saltRoundsHash = 12
@@ -70,10 +69,11 @@ const CompanyController = {
 
         try {
             await companyData.save()
-            res.status(200).json({ companyData })
+            return res.status(200).json({ success: { messag: "Cadastro realizado com sucesso." } })
 
-        } catch (errorr) {
-            res.status(500).json({ error: "Houve um problema no servidor. Tente novamente mais tarde." })
+        } catch (error) {
+            console.log(error)
+            return res.status(500).json({ error: { notice: "Houve um problema no servidor. Tente novamente mais tarde." } })
         }
     },
 }
