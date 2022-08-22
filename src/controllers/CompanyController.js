@@ -21,6 +21,7 @@ const CompanyController = {
 
         const companyData = {
             infos: {
+                company_id: cnpjExist._id,
                 fantasy_name: cnpjExist.fantasy_name,
                 corporate_name: cnpjExist.corporate_name,
             },
